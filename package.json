@@ -1,11 +1,10 @@
 {
   "name": "gourd",
   "version": "0.0.1",
-  "description": "A configable build tool",
+  "description": "A configurable tool for serve and build JS app",
   "author": "fedeoo",
   "license": "ISC",
   "repository": "git+https://github.com/fedeoo/gourd",
-  "git@github.com:fedeoo/gourd.git"
   "bin": {
     "gourd": "bin/index.js"
   },
