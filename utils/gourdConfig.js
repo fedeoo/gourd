@@ -13,9 +13,7 @@ function resolveApp(relativePath) {
 
 module.exports = () => {
   const baseConfig = {
-    entry: {
-      app: ['./main.js'],
-    },
+    entry: './main.js',
     publicPath: '/',
     externals: {
     },
@@ -44,6 +42,5 @@ module.exports = () => {
     paths.setPath(customConfig.paths);
   }
 
-  const config = merge({}, baseConfig, customConfig);
-  return Object.freeze(config);
+  return merge({}, baseConfig, customConfig);
 };

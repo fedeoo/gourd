@@ -2,22 +2,20 @@
 
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const babelConfig = require('../utils/babelConfig');
 const paths = require('./paths');
+const getEntry = require('../utils/getEntry');
+const getHtmlPlugins = require('../utils/getHtmlPlugins');
 
 module.exports = function (config) {
+  const entryFiles = getEntry(config.entry, paths.appSrc, false);
   const devServer = config.server;
   const entry = Object.assign({
     devServerClient: `${require.resolve('webpack-dev-server/client')}?http://${devServer.host}:${devServer.port}`,
-  }, config.entry);
+  }, entryFiles);
+  console.log('entry', entry);
 
-  const htmlPlugins = (config.htmlChunks || []).map((htmlChunkConfig) => {
-    const newConfig = Object.assign(htmlChunkConfig, {
-      chunks: [].concat(htmlChunkConfig.chunks).concat('devServerClient'),
-    });
-    return new HtmlWebpackPlugin(newConfig);
-  });
+  const htmlPlugins = getHtmlPlugins(entryFiles, config.html, false);
   const plugins = [
     new webpack.HotModuleReplacementPlugin(),
   ].concat(htmlPlugins);
