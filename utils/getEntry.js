@@ -27,7 +27,7 @@ function getEntries(files, isBuild) {
   return files.reduce((entryObj, entryFile) => {
     const chunkName = entryFile;
     entryObj[chunkName] = isBuild ? [entryFile] :
-      [require.resolve('react-hot-loader/patch'), require.resolve('webpack/hot/only-dev-server'), entryFile];
+      [require.resolve('react-hot-loader/patch'), require.resolve('react-dev-utils/webpackHotDevClient'), entryFile];
     return entryObj;
   }, {});
 }
