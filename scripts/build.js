@@ -6,7 +6,8 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 const webpack = require('webpack');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
-const gourdConfig = require('../utils/gourdConfig')();
+const argv = require('yargs').argv;
+const gourdConfig = require('../utils/gourdConfig')(argv.config);
 const webpackConfig = require('../config/webpack.config.prod')(gourdConfig);
 const paths = require('../config/paths');
 

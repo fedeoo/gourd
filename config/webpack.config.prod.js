@@ -4,12 +4,17 @@ const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const babelConfig = require('../utils/babelConfig');
+const getEntry = require('../utils/getEntry');
+const getHtmlPlugins = require('../utils/getHtmlPlugins');
 const paths = require('./paths');
 
+const isBuild = true;
 module.exports = function (config) {
+
+  const entryFiles = getEntry(config.entry, paths.appSrc, isBuild);
+  const htmlPlugins = getHtmlPlugins(entryFiles, config.html, isBuild);
 
   let plugins = [
     new webpack.LoaderOptionsPlugin({
@@ -45,15 +50,15 @@ module.exports = function (config) {
   if (config.commonChunks) {
     plugins.push(new webpack.optimize.CommonsChunkPlugin(config.commonChunks));
   }
-  const htmlPlugins = (config.htmlChunks || []).map((htmlChunkConfig) => {
-    return new HtmlWebpackPlugin(htmlChunkConfig);
-  });
+  // const htmlPlugins = (config.htmlChunks || []).map((htmlChunkConfig) => {
+  //   return new HtmlWebpackPlugin(htmlChunkConfig);
+  // });
   plugins = plugins.concat(htmlPlugins);
 
   return {
     context: paths.appSrc,
     devtool: false,
-    entry: config.entry || {},
+    entry: entryFiles,
     output: {
       path: paths.appBuild,
       filename: '[name].[chunkhash:12].js',

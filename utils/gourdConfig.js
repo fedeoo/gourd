@@ -11,23 +11,25 @@ function resolveApp(relativePath) {
   return path.resolve(appDirectory, relativePath);
 }
 
-module.exports = () => {
-  const baseConfig = {
-    entry: './main.js',
-    publicPath: '/',
-    externals: {
-    },
-    disableCSSModules: false,
-    server: {
-      host: '127.0.0.1',
-      port: 8080,
-      proxy: {},
-    },
-    htmlChunks: [],
-  };
+const baseConfig = {
+  entry: './index.js',
+  publicPath: '/',
+  externals: {
+  },
+  disableCSSModules: false,
+  server: {
+    host: '127.0.0.1',
+    port: 8080,
+    proxy: {},
+  },
+};
+
+module.exports = (configPath) => {
+  if (!configPath) {
+    configPath = resolveApp('gourd.config.js');
+  }
 
   let customConfig = {};
-  const configPath = resolveApp('gourd.config.js');
   if (fs.existsSync(configPath)) {
     customConfig = require(configPath);
     console.log(chalk.cyan(`Using config at ${configPath}`));
