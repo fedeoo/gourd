@@ -3,6 +3,7 @@
 const path = require('path');
 
 module.exports = {
+  babelrc: false,
   presets: [
     require.resolve('babel-preset-react'),
     [require.resolve('babel-preset-es2015'), { modules: false }],
