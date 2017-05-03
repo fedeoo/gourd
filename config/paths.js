@@ -24,6 +24,7 @@ function setPath(paths) {
 
 module.exports = {
   setPath,
+  realativeBuild: config.build,
   appSrc: resolveApp(config.src),
   appBuild: resolveApp(config.build),
   appPublic: resolveApp(config.public),

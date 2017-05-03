@@ -64,6 +64,7 @@ function build(previousFileSizes) {
 measureFileSizesBeforeBuild(paths.appBuild).then(previousFileSizes => {
   // Remove all content but keep the directory so that
   // if you're in it, you don't end up in Trash
+  console.log('clear dest dir', paths.appBuild);
   fs.emptyDirSync(paths.appBuild);
 
   // Start the webpack build

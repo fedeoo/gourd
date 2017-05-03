@@ -1,6 +1,5 @@
 'use strict';
 
-const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
@@ -17,22 +16,8 @@ module.exports = function (config) {
   const htmlPlugins = getHtmlPlugins(entryFiles, config.html, isBuild);
 
   let plugins = [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        context: paths.appSrc,
-        output: {
-          path: paths.appBuild,
-        },
-        postcss: [
-          autoprefixer({
-            remove: false,
-            browsers: ['last 2 versions', 'ie > 8', 'safari > 7'],
-          }),
-        ],
-      },
-    }),
     new ExtractTextPlugin('[name].[contenthash:12].css'),
-    new AssetsPlugin({ filename: 'assets.json', update: true }),
+    new AssetsPlugin({ filename: `${paths.realativeBuild}/assets.json`, update: true }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),

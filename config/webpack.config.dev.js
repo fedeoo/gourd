@@ -1,6 +1,5 @@
 'use strict';
 
-const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const babelConfig = require('../utils/babelConfig');
 const paths = require('./paths');
@@ -53,12 +52,6 @@ module.exports = function (config) {
           },
         }, {
           loader: 'postcss-loader',
-          options: {
-            plugins: [autoprefixer({
-              remove: false,
-              browsers: ['last 2 versions', 'ie > 8', 'safari > 7'],
-            })],
-          },
         }],
       }, {
         test: /\.scss$/,
@@ -73,12 +66,6 @@ module.exports = function (config) {
           },
         }, {
           loader: 'postcss-loader',
-          options: {
-            plugins: [autoprefixer({
-              remove: false,
-              browsers: ['last 2 versions', 'ie > 8', 'safari > 7'],
-            })],
-          },
         }, {
           loader: 'sass-loader',
           options: {
