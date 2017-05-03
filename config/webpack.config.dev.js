@@ -52,6 +52,9 @@ module.exports = function (config) {
           },
         }, {
           loader: 'postcss-loader',
+          query: {
+            config: paths.ownPostCSSConfig,
+          },
         }],
       }, {
         test: /\.scss$/,
@@ -66,6 +69,9 @@ module.exports = function (config) {
           },
         }, {
           loader: 'postcss-loader',
+          query: {
+            config: paths.ownPostCSSConfig,
+          },
         }, {
           loader: 'sass-loader',
           options: {

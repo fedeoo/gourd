@@ -31,4 +31,5 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'),
+  ownPostCSSConfig: resolveOwn('postcss.config.js'),
 }

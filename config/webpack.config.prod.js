@@ -35,9 +35,6 @@ module.exports = function (config) {
   if (config.commonChunks) {
     plugins.push(new webpack.optimize.CommonsChunkPlugin(config.commonChunks));
   }
-  // const htmlPlugins = (config.htmlChunks || []).map((htmlChunkConfig) => {
-  //   return new HtmlWebpackPlugin(htmlChunkConfig);
-  // });
   plugins = plugins.concat(htmlPlugins);
 
   return {
@@ -81,6 +78,9 @@ module.exports = function (config) {
             },
           }, {
             loader: 'postcss-loader',
+            query: {
+              config: paths.ownPostCSSConfig,
+            },
           }, {
             loader: 'sass-loader',
             query: {
