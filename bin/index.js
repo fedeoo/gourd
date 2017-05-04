@@ -3,6 +3,10 @@
 'use strict';
 
 const spawn = require('cross-spawn');
+const latestVersion = require('latest-version');
+const chalk = require('chalk');
+const packageJson = require('../package.json');
+
 const script = process.argv[2];
 const args = process.argv.slice(3);
 
@@ -19,11 +23,23 @@ const runScript = (script) => {
   process.exit(result.status);
 };
 
-switch (script) {
-  case 'start':
-  case 'build':
+function execute() {
+  switch (script) {
+    case 'start':
+    case 'build':
     runScript(script);
     break;
-  default:
+    default:
     console.log(`Unkown script ${script}.`);
+  }
 }
+
+latestVersion('gourd').then(version => {
+  if (packageJson.version !== version) {
+    console.log(chalk.yellow('检测到 @ali/santa-cli 有新版本，建议及时更新！'), version);
+  }
+  execute();
+}).catch((err) => {
+  console.log('检测新版本失败', err);
+  execute();
+});
