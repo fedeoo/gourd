@@ -1,6 +1,6 @@
 {
   "name": "gourd",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A configurable tool for serve and build JS app",
   "author": "fedeoo",
   "license": "ISC",
