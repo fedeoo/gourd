@@ -45,7 +45,7 @@ module.exports = function (config) {
       path: paths.appBuild,
       filename: '[name].[chunkhash:12].js',
       chunkFilename: '[name].[chunkhash:12].js',
-      publicPath: '/',
+      publicPath: config.publicPath,
       crossOriginLoading: 'anonymous', // lazy loaded script cross origin
     },
     resolve: {

@@ -1,7 +1,6 @@
 'use strict';
 
 const paths = require('./paths');
-
 module.exports = {
   disableHostCheck: true,
   compress: true,
@@ -17,4 +16,5 @@ module.exports = {
     ignored: /node_modules/,
   },
   proxy: {},
+  historyApiFallback: true,
 };
